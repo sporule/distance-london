@@ -1,0 +1,2 @@
+
+export const LOAD_CAMERA_SUCCESS = "LOAD_CAMERA_SUCCESS";

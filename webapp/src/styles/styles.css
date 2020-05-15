@@ -1,0 +1,8 @@
+.leaflet-container{
+    height: 100%;
+}
+
+video.popup {
+    height: 30vh;
+    max-width:300px;
+}

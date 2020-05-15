@@ -19,7 +19,8 @@ def get_cameras(api):
     for result in results:
         camera={}
         camera['image']=result['additionalProperties'][1]['value']
-        camera['location']=str(result['lat'])+","+str(result['lon'])
+        camera['lat']=result['lat']
+        camera['lon']=result['lon']
         camera['id']=camera['image'].split("/")[-1].split(".jpg")[0]
         cameras.append(camera)
     return cameras
@@ -35,9 +36,10 @@ def get_cameras_images(cameras):
         print("loading camera",camera['id'])
         image = requests.get(camera['image'])
         open("/root/a.jpg","wb").write(image.content)
-        print("counting camera:",camera['id'])
+        print("counting camera:",camera['id'],camera['lat'],camera['lon'])
         count = count_person(image)
-        results.append({"id":camera['id'],"count":count})
+        print("count:",count)
+        results.append({"id":camera['id'],"count":count,"position":[camera['lat'],camera['lon']]})
         i+=1
     return results
 
