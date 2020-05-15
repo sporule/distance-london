@@ -52,6 +52,7 @@ class MapPage extends React.Component {
                   <Popup>
                     <div>
                       <p>People Count: {camera.count}</p>
+                      <p>Last Update: 1990-01-01</p>
                       <video className="popup" autoPlay muted>
                         <source src={videoLocation} type="video/mp4"/>
                         </video>
@@ -73,12 +74,5 @@ function mapStateToProps(state) {
     // sources:state.sources
   };
 }
-
-function mapDispatchToProps(dispatch) {
-  return {
-            //   actions: bindActionCreators(videoActions, dispatch)
-          };
-}
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapPage);
