@@ -52,7 +52,7 @@ class MapPage extends React.Component {
                   <Popup>
                     <div>
                       <p>People Count: {camera.count}</p>
-                      <p>Last Update: 1990-01-01</p>
+                      <p>Last Update: 1999-01-01</p>
                       <video className="popup" autoPlay muted>
                         <source src={videoLocation} type="video/mp4"/>
                         </video>
