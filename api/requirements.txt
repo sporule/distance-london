@@ -1,6 +1,7 @@
 astroid==2.4.1
 autopep8==1.5.2
 click==7.1.2
+dnspython==1.16.0
 Flask==1.1.2
 gunicorn==20.0.4
 isort==4.3.21
