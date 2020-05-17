@@ -36,7 +36,7 @@ def count_person(camera):
     image = np.asarray(bytearray(res.read()), dtype='uint8')
     image = cv2.imdecode(image, cv2.IMREAD_COLOR)
     _, detections = detector.detectCustomObjectsFromImage(
-        custom_objects=custom_objects, input_image=image, input_type='array', output_type='array', minimum_percentage_probability=60)
+        custom_objects=custom_objects, input_image=image, input_type='array', output_type='array', minimum_percentage_probability=50)
     count = len(detections)
     result = {'name': camera['name'], 'count': count, 'position':
                 camera['position'], 'street': camera['street']}
@@ -49,9 +49,9 @@ def send_to_db(camera):
     while True and attepmt <= 10:
         response = requests.post(url, timeout=50, json=camera)
         if response.status_code == 200:
-            print('item sent to db: ' , str(camera))
+            print(datetime.datetime.now(),'item sent to db: ' , camera)
             break
-        print('sending to db failed, attempt: ', attepmt, str(camera))
+        print(datetime.datetime.now(),'sending to db failed, attempt: ', attepmt, camera)
         attepmt += 1
         time.sleep(15)
 
