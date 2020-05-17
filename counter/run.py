@@ -40,7 +40,6 @@ def count_person(camera):
     count = len(detections)
     result = {'name': camera['name'], 'count': count, 'position':
                 camera['position'], 'street': camera['street']}
-    print(result,camera['image'])
     send_to_db(result)
 
 
@@ -51,9 +50,9 @@ def send_to_db(camera):
     while True and attepmt <= 10:
         response = requests.post(url, timeout=50, json=camera)
         if response.status_code == 200:
-            logging.info('item sent to db: ' + str(camera))
+            print('item sent to db: ' , str(camera))
             break
-        logging.info('sending to db failed, attempt: '+ attepmt)
+        print('sending to db failed, attempt: ', attepmt, str(camera))
         attepmt += 1
         time.sleep(15)
 
