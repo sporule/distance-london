@@ -22,7 +22,7 @@ def add_cameras(pin):
     cameras = Camera.get(query)
     if len(cameras) <= 0:
         camera = Camera(json_dict['name'], json_dict['position'], json_dict['street'], [
-                        {"count": json_dict['count'], "update_time":datetime.now()}])
+                        {"count": json_dict['count'], "update_time":datetime.now()}],json_dict['count'],datetime.now())
         return res(camera.insert())
     camera = cameras[0]
     camera.add_count(json_dict['count'])

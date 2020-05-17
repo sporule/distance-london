@@ -15,11 +15,13 @@ class Camera:
     count = ""
     update_time = ""
 
-    def __init__(self, name, position, street, counts):
+    def __init__(self, name, position, street, counts,count,update_time):
         self.name = name
         self.position = position
         self.street = street
         self.counts = counts
+        self.count=count
+        self.update_time = update_time
 
     def insert(self):
         self.update_time = datetime.now()
@@ -36,16 +38,16 @@ class Camera:
                                 {
                                     "counts": {
                                         "count": count,
-                                        "time": update_time
+                                        "update_time": update_time
                                     }
                                 }
                             }
         self.update(new_values_query)
-        new_values_query = {"$set":{
-            "latest_count":count,
+        another_query = {"$set":{
+            "count":count,
             "update_time":update_time
         }}
-        self.update(new_values_query)
+        self.update(another_query)
     
     def as_dict(self):
         result = self.__dict__
@@ -64,5 +66,5 @@ class Camera:
     
     @staticmethod
     def dict_to_object(dict):
-        camera = Camera(dict['name'],dict['position'],dict['street'],dict['counts'])
+        camera = Camera(dict['name'],dict['position'],dict['street'],dict['counts'],dict['count'],dict['update_time'])
         return camera
