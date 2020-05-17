@@ -2,7 +2,7 @@ import requests
 from imageai.Detection import ObjectDetection
 import time
 import os
-import logging
+import datetime
 import json
 import numpy as np
 import cv2
