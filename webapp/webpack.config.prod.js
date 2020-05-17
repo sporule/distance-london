@@ -92,6 +92,7 @@ module.exports={
       background_color: '#ffffff',
       includeDirectory:true,
       orientation:'portrait',
+      inject:true,
       ios: true,
       crossorigin: 'anonymous', //can be null, use-credentials or anonymous
       "theme_color": "#3367D6",
