@@ -37,22 +37,26 @@ class MapPage extends React.Component {
           />
           <Marker position={this.state.position}>
             <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
+              Your Current Location
           </Popup>
           </Marker>
           {
             this.props.cameras.map((camera, index) => {
-              let videoLocation = "https://s3-eu-west-1.amazonaws.com/jamcams.tfl.gov.uk/"+camera.id+".mp4";
+              let videoLocation = "https://s3-eu-west-1.amazonaws.com/jamcams.tfl.gov.uk/"+camera.name+".mp4";
               let color = "green";
-              if (camera.count > 5) {
+              if (camera.count >=5){
+                color="yellow"
+              }
+              if (camera.count >= 10) {
                 color = "red"
               }
               return (
                 <Circle key={index} center={camera.position} radius={150} color={color}>
                   <Popup>
                     <div>
-                      <p>People Count: {camera.count}</p>
-                      <p>Last Update: 1990-01-01</p>
+                      <p>Pedestrian Count: {camera.count}</p>
+                      <p>Measure Time: {new Date(camera.update_time).toTimeString().slice(0,8)}</p>
+                      <p>TFL Live Stream:</p>
                       <video className="popup" autoPlay muted>
                         <source src={videoLocation} type="video/mp4"/>
                         </video>

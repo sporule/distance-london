@@ -5,6 +5,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {GenerateSW} = require('workbox-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const GLOBALS={
+  'process.env.NODE_ENV':JSON.stringify('production')
+};
 
 
 module.exports={
@@ -47,7 +51,7 @@ module.exports={
       },
       {
         test:/(\.css)$/,
-        use:["css-loader"]
+        use:[MiniCssExtractPlugin.loader, 'css-loader']
       },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
@@ -65,6 +69,12 @@ module.exports={
     new HtmlWebpackPlugin({
       template:'src/index.html',
       title: 'Distance',
+    }),
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: "[name].[contenthash].css",
+      chunkFilename: "[id].css"
     }),
     new GenerateSW({
       maximumFileSizeToCacheInBytes:1e+7,

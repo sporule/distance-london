@@ -5,6 +5,7 @@ import configureStore from './store/configureStore';
 import initialState from "./reducers/InitialState";
 import { PersistGate } from 'redux-persist/integration/react';
 import App from './pages/App';
+import {loadCamera} from "./actions/CameraAction"
 import 'onsenui/css/onsenui.css';
 import 'onsenui/css/onsen-css-components.css';
 import './styles/styles.css';
@@ -25,7 +26,7 @@ else if ('serviceWorker' in navigator) {
                 insworker.addEventListener('statechange', () => {
                     if (insworker.state == 'installed') {
                         //reload window or show ui for refreshing the app
-                        //window.location.reload();
+                        window.location.reload();
                     }
                 });
             });
@@ -33,11 +34,10 @@ else if ('serviceWorker' in navigator) {
     });
 }
 
-setTimeout(() => {
-    //initial load
-    const states = store.getState();
-    // store.dispatch(PostAction.loadPosts());
-}, 1000)
+store.dispatch(loadCamera());
+setInterval(()=>{
+    store.dispatch(loadCamera());
+}, 900000);
 
 
 
