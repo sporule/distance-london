@@ -7,21 +7,26 @@ import json
 import numpy as np
 import cv2
 import wget
+import logging
+
+logging.basicConfig()
+logging.root.setLevel(logging.INFO)
 
 tfl_api = 'https://api.tfl.gov.uk/Place/Type/JamCam'
 model_url='https://github.com/OlafenwaMoses/ImageAI/releases/download/1.0/yolo.h5'
 
 detector = ObjectDetection()
 detector.setModelTypeAsYOLOv3()
-while not os.path.exists('models/yolo.h5'):
-    wget.download('https://github.com/OlafenwaMoses/ImageAI/releases/download/1.0/yolo.h5',out='models')
-detector.setModelPath('models/yolo.h5')
+model_path = os.getenv('model_path', 'models/yolo.h5')
+while not os.path.exists(model_path):
+    wget.download('https://github.com/OlafenwaMoses/ImageAI/releases/download/1.0/yolo.h5',out=model_path)
+detector.setModelPath(model_path)
 detector.loadModel()
 custom_objects = detector.CustomObjects(person=True)
 
 
 def get_cameras(api):
-    print('loading camera list')
+    logging.info(str(datetime.datetime.now())+'Loading camera list')
     r = requests.get(api)
     if r.status_code != 200:
         return []
@@ -49,9 +54,9 @@ def send_to_db(camera):
     while True and attepmt <= 10:
         response = requests.post(url, timeout=50, json=camera)
         if response.status_code == 200:
-            print(datetime.datetime.now(),'item sent to db: ' , camera)
+            logging.info(str(datetime.datetime.now())+ 'item sent to db: ' + str(camera))
             break
-        print(datetime.datetime.now(),'sending to db failed, attempt: ', attepmt, camera)
+        logging.info(str(datetime.datetime.now())+ 'sending to db failed, attempt: ' + str(attepmt))
         attepmt += 1
         time.sleep(15)
 
