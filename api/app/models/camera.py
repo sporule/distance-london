@@ -24,7 +24,7 @@ class Camera:
     def insert(self):
         self.update_time = datetime.now()
         id = self.__col__.insert_one(self.__dict__)
-        return id
+        return str(id.inserted_id)
 
     def update(self, new_values_query):
         query = {"name": self.name}
@@ -46,6 +46,11 @@ class Camera:
             "update_time":update_time
         }}
         self.update(new_values_query)
+    
+    def as_dict(self):
+        result = self.__dict__
+        result.pop('counts', None)
+        return result
 
     @staticmethod
     def get(query):

@@ -10,7 +10,7 @@ from datetime import datetime
 @api_v1.route('/cameras', methods=['GET'])
 def get_cameras():
     items = Camera.get(None)
-    return res([item.__dict__ for item in items])
+    return res([item.as_dict() for item in items])
 
 
 @api_v1.route('/cameras/<string:pin>', methods=['POST'])
