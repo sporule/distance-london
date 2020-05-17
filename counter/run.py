@@ -13,7 +13,7 @@ model_url='https://github.com/OlafenwaMoses/ImageAI/releases/download/1.0/yolo.h
 
 detector = ObjectDetection()
 detector.setModelTypeAsYOLOv3()
-while not os.path.exists('yolo.h5'):
+while not os.path.exists('models/yolo.h5'):
     wget.download('https://github.com/OlafenwaMoses/ImageAI/releases/download/1.0/yolo.h5',out='models')
 detector.setModelPath('models/yolo.h5')
 detector.loadModel()
