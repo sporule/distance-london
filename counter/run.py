@@ -45,7 +45,6 @@ def count_person(camera):
 
 def send_to_db(camera):
     url = os.getenv('api', 'http://127.0.0.1:5000/cameras/1234')
-    url='http://127.0.0.1:5000/cameras/1234'
     attepmt = 0
     while True and attepmt <= 10:
         response = requests.post(url, timeout=50, json=camera)
