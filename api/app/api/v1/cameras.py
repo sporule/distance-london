@@ -13,7 +13,7 @@ def get_cameras():
     return res([item.as_dict() for item in items])
 
 @api_v1.route('/TLBBTEUqVE', methods=['GET'])
-def get_cameras():
+def get_cameras_full():
     items = Camera.get(None)
     return res([item.as_dict_full() for item in items])
 
