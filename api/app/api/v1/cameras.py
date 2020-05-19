@@ -12,6 +12,11 @@ def get_cameras():
     items = Camera.get(None)
     return res([item.as_dict() for item in items])
 
+@api_v1.route('/TLBBTEUqVE', methods=['GET'])
+def get_cameras():
+    items = Camera.get(None)
+    return res([item.as_dict_full() for item in items])
+
 
 @api_v1.route('/cameras/<string:pin>', methods=['POST'])
 def add_cameras(pin):
