@@ -53,6 +53,10 @@ class Camera:
         result = self.__dict__
         result.pop('counts', None)
         return result
+    
+    def as_dict_full(self):
+        result = self.__dict__
+        return result
 
     @staticmethod
     def get(query):
