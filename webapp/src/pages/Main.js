@@ -18,13 +18,14 @@ class Main extends React.Component {
         const renderTabs = () => {
             return [
                 {
-                    content: <InfoTab key={1} />,
-                    tab: <Ons.Tab icon="md-info" key={1} />
+                    content: <MapTab key={1} />,
+                    tab: <Ons.Tab icon="md-layers" key={1} />
                 },
                 {
-                    content: <MapTab key={1} />,
-                    tab: <Ons.Tab icon="md-layers" key={2} />
+                    content: <InfoTab key={1} />,
+                    tab: <Ons.Tab icon="md-info" key={2} />
                 }
+
             ];
         };
         return (
