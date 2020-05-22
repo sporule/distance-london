@@ -55,7 +55,7 @@ class MapPage extends React.Component {
                   <Popup>
                     <div>
                       <p>Pedestrian Count: {camera.count}</p>
-                      <p>Measure Time: {new Date(camera.update_time).toTimeString().slice(0,8)}</p>
+                      <p>Last Update: {new Date(camera.update_time).toTimeString().slice(0,8)}</p>
                       <p>TFL Live Stream:</p>
                       <video className="popup" autoPlay loop muted>
                         <source src={videoLocation} type="video/mp4"/>
