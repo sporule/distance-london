@@ -9,7 +9,7 @@ class InfoTab extends React.Component {
   }
     render() {
       //Initial Route for Video Tab
-      const route = RouteCreator(InfoPage,{title:"Info",hasBackButton:false});
+      const route = RouteCreator(InfoPage,{title:"About Us",hasBackButton:false});
       return (
         <Navigator route={route}/>
         );
