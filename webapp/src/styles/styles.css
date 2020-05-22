@@ -6,3 +6,21 @@ video.popup {
     height: 30vh;
     max-width:300px;
 }
+
+ons-toolbar.toolbar, .tabbar.ons-tabbar__footer.ons-swiper-tabbar{
+    background: #005eb8;
+}
+
+.center.toolbar__center.toolbar__title, .tabbar__icon {
+    color: white;
+}
+
+.active button.tabbar__button {
+    background: #000077;
+}
+
+.leaflet-popup-content-wrapper,a.leaflet-control-zoom-in, a.leaflet-control-zoom-out {
+    background: #005eb8;
+    color: white;
+    font-size: 1rem;
+}
