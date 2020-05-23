@@ -31,12 +31,14 @@ def get_cameras(api):
     if r.status_code != 200:
         return []
     results = r.json()
-    image_url = [ property for property in results['additionalProperties'] if property['key'].lower()=='imageurl'][0]['value']
-    if len(image_url)>2:
-        cameras = [{'name': image_url.split('/')[-1].split('.jpg')[0], 'image':image_url, 'position':[
-            result['lat'], result['lon']], 'street':result['commonName']} for result in results]
-    else:
-        logging.info("Error, image url is smaller than 2")
+    cameras = []
+    for result in results:
+        image_url = [ property for property in result['additionalProperties'] if property['key'].lower()=='imageurl'][0]['value']
+        if len(image_url)>2:
+            cameras.append({'name': image_url.split('/')[-1].split('.jpg')[0], 'image':image_url, 'position':[
+                result['lat'], result['lon']], 'street':result['commonName']})
+        else:
+            logging.info("Error, image url is smaller than 2")
     return cameras
 
 
