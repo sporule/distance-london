@@ -31,21 +31,28 @@ def get_cameras(api):
     if r.status_code != 200:
         return []
     results = r.json()
-    cameras = [{'name': result['additionalProperties'][1]['value'].split('/')[-1].split('.jpg')[0], 'image':result['additionalProperties'][1]['value'], 'position':[
-        result['lat'], result['lon']], 'street':result['commonName']} for result in results]
+    image_url = [ property for property in result['additionalProperties'] if property['key'].lower()=='imageurl'][0]['value']
+    if len(image_url)>2:
+        cameras = [{'name': image_url.split('/')[-1].split('.jpg')[0], 'image':image_url, 'position':[
+            result['lat'], result['lon']], 'street':result['commonName']} for result in results]
+    else:
+        logging.info("Error, image url is smaller than 2")
     return cameras
 
 
 def count_person(camera):
-    res = requests.get(camera['image'], stream=True).raw
-    image = np.asarray(bytearray(res.read()), dtype='uint8')
-    image = cv2.imdecode(image, cv2.IMREAD_COLOR)
-    _, detections = detector.detectCustomObjectsFromImage(
-        custom_objects=custom_objects, input_image=image, input_type='array', output_type='array', minimum_percentage_probability=50)
-    count = len(detections)
-    result = {'name': camera['name'], 'count': count, 'position':
-                camera['position'], 'street': camera['street']}
-    send_to_db(result)
+    if camera['image'].startswith( 'http' ):
+        res = requests.get(camera['image'], stream=True).raw
+        image = np.asarray(bytearray(res.read()), dtype='uint8')
+        image = cv2.imdecode(image, cv2.IMREAD_COLOR)
+        _, detections = detector.detectCustomObjectsFromImage(
+            custom_objects=custom_objects, input_image=image, input_type='array', output_type='array', minimum_percentage_probability=50)
+        count = len(detections)
+        result = {'name': camera['name'], 'count': count, 'position':
+                    camera['position'], 'street': camera['street']}
+        send_to_db(result)
+    else:
+        logging.info('Image url is not valid, '+camera['image'])
 
 
 def send_to_db(camera):
