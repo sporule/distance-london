@@ -28,3 +28,7 @@ ons-toolbar.toolbar, .tabbar.ons-tabbar__footer.ons-swiper-tabbar{
 .pwa-logo{
     width: 8em;
 }
+
+.a2hs__container {
+    z-index: 99999!important;
+}

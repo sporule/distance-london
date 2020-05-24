@@ -98,7 +98,14 @@ module.exports={
       icons: [
         {
           src: path.resolve('src/publish_assets/logo-ios.png'),
-          sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
+          sizes: [96, 128, 192, 256, 384, 512,1024], // multiple sizes
+          ios: true
+        }
+        ,
+        {
+          src: path.resolve('src/publish_assets/logo-ios.png'),
+          sizes: 1024, // multiple sizes
+          ios: 'startup'
         }
       ],
       ios: {

@@ -15,6 +15,7 @@ class Main extends React.Component {
     }
 
     componentDidMount() {
+        console.log("mount");
         AddToHomeScreen({
             brandName: "Distance - London",
             logoImage: "<img class='pwa-logo' src='https://i.ibb.co/0tb6fKQ/distance-london-logo.png' />"
