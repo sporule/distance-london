@@ -104,7 +104,7 @@ module.exports={
         ,
         {
           src: path.resolve('src/publish_assets/logo-ios.png'),
-          sizes: [512,1024], // multiple sizes
+          sizes: [96, 128, 192, 256, 384, 512,1024], // multiple sizes
           ios: 'startup'
         }
       ],
