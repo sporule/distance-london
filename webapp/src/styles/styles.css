@@ -7,7 +7,7 @@ video.popup {
     max-width:300px;
 }
 
-ons-toolbar.toolbar, .tabbar.ons-tabbar__footer.ons-swiper-tabbar{
+ons-toolbar.toolbar, .tabbar.ons-tabbar__footer.ons-swiper-tabbar, body{
     background: #005eb8;
 }
 
