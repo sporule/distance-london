@@ -3,6 +3,7 @@ import * as Ons from "react-onsenui";
 import TabBar from "./TabBar";
 import MapTab from "./MapTab";
 import InfoTab from "./InfoTab";
+import AddToHomeScreen from "a2hs.js";
 
 
 
@@ -11,6 +12,13 @@ class Main extends React.Component {
         super(props, context);
         this.state = {
         };
+    }
+
+    componentDidMount() {
+        AddToHomeScreen({
+            brandName: "Distance - London",
+            logoImage: "<img class='pwa-logo' src='https://i.ibb.co/0tb6fKQ/distance-london-logo.png' />"
+        });
     }
 
     render() {

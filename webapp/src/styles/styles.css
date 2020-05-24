@@ -24,3 +24,7 @@ ons-toolbar.toolbar, .tabbar.ons-tabbar__footer.ons-swiper-tabbar{
     color: white;
     font-size: 1rem;
 }
+
+.pwa-logo{
+    width: 8em;
+}
