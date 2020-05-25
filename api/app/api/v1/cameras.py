@@ -9,13 +9,14 @@ from datetime import datetime
 
 @api_v1.route('/cameras', methods=['GET'])
 def get_cameras():
-    items = Camera.get(None)
+    items = Camera.get(None, {'name': 1, 'position': 1, 'count':1,'update_time': 1})
     return res([item.as_dict() for item in items])
+
 
 @api_v1.route('/TLBBTEUqVE', methods=['GET'])
 def get_cameras_full():
-    items = Camera.get(None)
-    return res([item.as_dict_full() for item in items])
+    items = Camera.get()
+    return res([item.as_dict() for item in items])
 
 
 @api_v1.route('/cameras/<string:pin>', methods=['POST'])
@@ -26,9 +27,14 @@ def add_cameras(pin):
     query = {"name": json_dict['name']}
     cameras = Camera.get(query)
     if len(cameras) <= 0:
-        camera = Camera(json_dict['name'], json_dict['position'], json_dict['street'], [
-                        {"count": json_dict['count'], "update_time":datetime.now()}],json_dict['count'],datetime.now())
+        camera = Camera()
+        camera.name = json_dict['name']
+        camera.position = json_dict['position']
+        camera.street = json_dict['street']
+        camera.counts=[{"count": json_dict['count'], "update_time":datetime.now()}]
+        camera.count = json_dict['count']
+        camera.update_time = datetime.now()
         return res(camera.insert())
-    camera = cameras[0]
+    camera=cameras[0]
     camera.add_count(json_dict['count'])
     return res()

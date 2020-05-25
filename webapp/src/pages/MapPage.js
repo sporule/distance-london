@@ -65,7 +65,7 @@ class MapPage extends React.Component {
                   <Popup>
                     <div>
                       <p>Pedestrian Count: {camera.count}</p>
-                      <p>The number above was measured at {new Date(camera.update_time).toTimeString().slice(0, 8)}, please use TFS Live Camera below to get the most recent situation:</p>
+                      <p>The number above was measured at {new Date(camera.update_time).toTimeString().slice(0, 8)}, please use live TFL Camera below to see the most recent situation:</p>
                       {liveCamera}
                       }
 

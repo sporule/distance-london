@@ -15,14 +15,6 @@ class Camera:
     count = ""
     update_time = ""
 
-    def __init__(self, name, position, street, counts,count,update_time):
-        self.name = name
-        self.position = position
-        self.street = street
-        self.counts = counts
-        self.count=count
-        self.update_time = update_time
-
     def insert(self):
         self.update_time = datetime.now()
         id = self.__col__.insert_one(self.__dict__)
@@ -51,16 +43,11 @@ class Camera:
     
     def as_dict(self):
         result = self.__dict__
-        result.pop('counts', None)
-        return result
-    
-    def as_dict_full(self):
-        result = self.__dict__
         return result
 
     @staticmethod
-    def get(query):
-        results = Camera.__col__.find(query)
+    def get(query=None,fields=None):
+        results = Camera.__col__.find(query,fields)
         cameras= [Camera.dict_to_object(result) for result in results]
         return cameras
 
@@ -69,6 +56,10 @@ class Camera:
         Camera.__col__.delete_many(query)
     
     @staticmethod
-    def dict_to_object(dict):
-        camera = Camera(dict['name'],dict['position'],dict['street'],dict['counts'],dict['count'],dict['update_time'])
+    def dict_to_object(obj_dict):
+        camera = Camera()
+        for key in obj_dict:
+            if key == "_id":
+                continue
+            setattr(camera,key,obj_dict[key])
         return camera
