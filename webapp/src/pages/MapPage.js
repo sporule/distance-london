@@ -42,24 +42,33 @@ class MapPage extends React.Component {
           </Marker>
           {
             this.props.cameras.map((camera, index) => {
-              let videoLocation = "https://s3-eu-west-1.amazonaws.com/jamcams.tfl.gov.uk/"+camera.name+".mp4";
+              let videoLocation = "https://s3-eu-west-1.amazonaws.com/jamcams.tfl.gov.uk/" + camera.name + ".mp4";
               let color = "green";
-              if (camera.count >=5){
-                color="yellow"
+              if (camera.count >= 5) {
+                color = "yellow"
               }
               if (camera.count >= 10) {
                 color = "red"
+              }
+              let liveCamera = (<video className="popup" autoPlay loop muted>
+                <source src={videoLocation} type="video/mp4" />
+              </video>)
+              if (navigator.platform && /ipad|iphone|ipod/.test(navigator.platform.toLowerCase())) {
+                liveCamera = (
+                  <video className="popup" loop muted>
+                    <source src={videoLocation} type="video/mp4" />
+                  </video>
+                )
               }
               return (
                 <Circle key={index} center={camera.position} radius={150} color={color}>
                   <Popup>
                     <div>
                       <p>Pedestrian Count: {camera.count}</p>
-                      <p>Last Update: {new Date(camera.update_time).toTimeString().slice(0,8)}</p>
-                      <p>TFL Live Stream:</p>
-                      <video className="popup" autoPlay loop muted>
-                        <source src={videoLocation} type="video/mp4"/>
-                        </video>
+                      <p>The number above was measured at {new Date(camera.update_time).toTimeString().slice(0, 8)}, please use TFS Live Camera below to get the most up to date situation:</p>
+                      {liveCamera}
+                      }
+
                     </div>
                   </Popup>
                 </Circle>
@@ -68,13 +77,13 @@ class MapPage extends React.Component {
           }
         </Map>
       </Ons.Page>
-              );
-            }
+    );
+  }
 }
 
 function mapStateToProps(state) {
   return {
-            cameras: state.cameras,
+    cameras: state.cameras,
     // sources:state.sources
   };
 }
