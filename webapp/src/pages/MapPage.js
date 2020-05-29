@@ -50,12 +50,12 @@ class MapPage extends React.Component {
               if (camera.count >= 10) {
                 color = "red"
               }
-              let liveCamera = (<video className="popup" autoPlay loop muted>
+              let liveCamera = (<video className="popup" autoPlay loop muted preload="metadata">
                 <source src={videoLocation} type="video/mp4" />
               </video>)
               if (navigator.platform && /ipad|iphone|ipod/.test(navigator.platform.toLowerCase())) {
                 liveCamera = (
-                  <video className="popup" loop muted controls>
+                  <video className="popup" loop muted controls preload="metadata">
                     <source src={videoLocation} type="video/mp4" />
                   </video>
                 )
