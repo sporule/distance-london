@@ -53,13 +53,6 @@ class MapPage extends React.Component {
               let liveCamera = (<video className="popup" autoPlay loop muted preload="metadata">
                 <source src={videoLocation} type="video/mp4" />
               </video>)
-              if (navigator.platform && /ipad|iphone|ipod/.test(navigator.platform.toLowerCase())) {
-                liveCamera = (
-                  <video className="popup" loop muted controls preload="metadata">
-                    <source src={videoLocation} type="video/mp4" />
-                  </video>
-                )
-              }
               return (
                 <Circle key={index} center={camera.position} radius={150} color={color}>
                   <Popup>
