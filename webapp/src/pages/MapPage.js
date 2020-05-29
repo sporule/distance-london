@@ -55,7 +55,7 @@ class MapPage extends React.Component {
               </video>)
               if (navigator.platform && /ipad|iphone|ipod/.test(navigator.platform.toLowerCase())) {
                 liveCamera = (
-                  <video className="popup" loop muted>
+                  <video className="popup" loop muted controls>
                     <source src={videoLocation} type="video/mp4" />
                   </video>
                 )
