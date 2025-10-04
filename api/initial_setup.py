@@ -39,7 +39,7 @@ if __name__ == "__main__":
         MAIL_DEFAULT_SENDER = ConfigValues('MAIL_DEFAULT_SENDER', 'adayahouseshop@gmail.com')
         EMAIL_PASSWORD_RESET_SECRET_KEY= ConfigValues('EMAIL_PASSWORD_RESET_SECRET_KEY', 'Thisisasecret!')
         SIB_KEY = ConfigValues('SIB_KEY', 'gzryVUPZHa1GW7n6')
-        for x in range(1, 11):
+        for x in range(1, 30):
             variation = Variation('S')
             variation.product_id = x
             variation.price = 10
